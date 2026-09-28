@@ -71,9 +71,15 @@ PC 读取结果：
 5. 如需确认当前状态，读取 State Characteristic。
 6. 断开连接后，ESP32-C3 会继续广播，允许 PC 再次连接。
 
-## 5. Python 最小示例
+## 5. Python 示例
 
-仓库内提供 `pc_toggle_valve.py`。该脚本会连接 ESP32-C3，写入一次 `TOGGLE`，然后读取并打印 GPIO10 当前状态。
+仓库内提供两个 PC 端示例。
+
+`pc_toggle_valve.py` 是一次性最小示例。该脚本会连接 ESP32-C3，写入一次 `TOGGLE`，然后读取并打印 GPIO10 当前状态，随后自动断开连接。
+
+`pc_valve_button.py` 是持续连接按钮版。该脚本会保持 BLE 连接，窗口中按钮每点击一次就写入一次 `TOGGLE`，并刷新显示 GPIO10 当前状态。
+
+`web_ble_valve_control.html` 是 Web BLE 版本。该页面在支持 Web Bluetooth 的浏览器中运行，保持 BLE 连接，页面按钮每点击一次就写入一次 `TOGGLE`，并刷新显示 GPIO10 当前状态。
 
 安装依赖：
 
@@ -81,11 +87,31 @@ PC 读取结果：
 pip install bleak
 ```
 
-运行：
+运行一次性最小示例：
 
 ```bash
 python pc_toggle_valve.py
 ```
+
+运行持续连接按钮版：
+
+```bash
+python pc_valve_button.py
+```
+
+运行 Web BLE 版本：
+
+```bash
+python -m http.server 8000
+```
+
+然后用 Chrome 或 Edge 打开：
+
+```text
+http://localhost:8000/web_ble_valve_control.html
+```
+
+Web BLE 需要浏览器支持，并且需要在 HTTPS 或 `localhost` 这类安全上下文中运行。连接蓝牙设备必须由用户点击页面按钮触发。
 
 ## 6. Arduino IDE 使用说明
 
