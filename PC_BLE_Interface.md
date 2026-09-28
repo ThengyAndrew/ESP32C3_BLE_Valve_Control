@@ -71,7 +71,23 @@ PC 读取结果：
 5. 如需确认当前状态，读取 State Characteristic。
 6. 断开连接后，ESP32-C3 会继续广播，允许 PC 再次连接。
 
-## 5. Arduino IDE 使用说明
+## 5. Python 最小示例
+
+仓库内提供 `pc_toggle_valve.py`。该脚本会连接 ESP32-C3，写入一次 `TOGGLE`，然后读取并打印 GPIO10 当前状态。
+
+安装依赖：
+
+```bash
+pip install bleak
+```
+
+运行：
+
+```bash
+python pc_toggle_valve.py
+```
+
+## 6. Arduino IDE 使用说明
 
 1. 安装 ESP32 Arduino 开发板支持包。
 2. 开发板选择支持 ESP32-C3 的板型，例如 `XIAO_ESP32C3` 或对应实际开发板。
@@ -79,7 +95,7 @@ PC 读取结果：
 4. 编译并烧录。
 5. 上电后 GPIO10 初始输出低电平。
 
-## 6. 硬件注意事项
+## 7. 硬件注意事项
 
 GPIO10 只能输出逻辑电平，不能直接驱动电磁阀线圈。
 
